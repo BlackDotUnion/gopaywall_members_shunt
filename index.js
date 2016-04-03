@@ -136,7 +136,7 @@ function makeAuthKey(userInfo, minute) {
     return hmac.read();
 }
 
-function * getUsersData() {
+function * getUsersData(user, auth_key) {
     var csvDataStr = yield getUsersCsv;
     var parsedCsv = yield csvParser.bind(null, csvDataStr);
     var customFields = yield getCustomFields;
@@ -163,7 +163,7 @@ app.use(function *(){
         result = require('./test_data.json');
     } else {
         this.set("Access-Control-Allow-Origin", "www.blackdotunion.com");
-        result = yield getUsersData;
+        result = yield getUsersData(user, auth_key);
     }
 
     this.body = JSON.stringify(result);
