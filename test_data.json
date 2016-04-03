@@ -1,0 +1,90 @@
+[
+    {
+        "first_name": "Joe",
+        "middle_name": "",
+        "last_name": "Norris",
+        "professional_title": "JoNoDesigns",
+        "description": "Looking to be a bad ass designer and build a client base in Seattle.",
+        "skills": [
+            "Web Development",
+            "JavaScript",
+            "Paralax",
+            "Web Design",
+            "Photography",
+            "Tee Shirt Printing"
+        ],
+        "interests": [
+            "Music",
+            "Dope Artwork",
+            "Networking"
+        ],
+        "phone_number": "(206) 123-4567",
+        "twitter": "http://twitter.com/some_guy",
+        "facebook": "http://facebook.com/some_guy",
+        "instagram": "http://instagram.com/some_guy",
+        "linkedin": "http://linkedin.com/some_guy",
+        "email": "yourboybstar@gmail.com",
+        "avatar": "aramis.jpg",
+        "websites": [
+            "JoeNoDesigns.com",
+            "http://JoeNoPhoto.com",
+            "//JoeNoFolio.com"
+        ],
+        "membership_id": 4
+    },
+    {
+        "first_name": "David",
+        "middle_name": "D.",
+        "last_name": "Harris",
+        "professional_title": "Cultural Entrepreneur",
+        "description": "I want to be involved in the Central District Community. I'm developing a business to explore how to better serve the Black Community.",
+        "skills": [
+            "Web Development", "JavaScript", "Paralax", "Advocacy", 
+            "Photography", "Development Strategies"
+        ],
+        "interests": [
+            "Hack-a-thons", "Design", "Networking", "Engineering"
+        ],
+        "phone_number": "2061234567",
+        "twitter": "http://twitter.com/dharris",
+        "facebook": "http://facebook.com/dharris",
+        "instagram": "http://instagram.com/dharris",
+        "linkedin": "http://linkedin.com/dharris",
+        "email": "ddharris@gmail.com",
+        "avatar": "monica_360.jpg",
+        "websites": [
+            "ddharris.com"
+        ],
+        "membership_id": 20
+    },
+    {
+        "first_name": "Yvonne",
+        "middle_name": "",
+        "last_name": "Smith",
+        "professional_title": "Retired CIO",
+        "description": "I have a lot of skills from my time as a CTO and CIO in big corporations that I would like to share.",
+        "skills": [
+            "Business planning",
+            "Budgeting",
+            "Finance",
+            "Development Strategies"
+        ],
+        "interests": [
+            "Community",
+            "Women's issues",
+            "Networking"
+        ],
+        "phone_number": "(206 123  - 4567",
+        "twitter": "",
+        "facebook": "",
+        "instagram": "",
+        "linkedin": "http://linkedin.com/yvonne_smith",
+        "email": "ysmith@gmail.com",
+        "avatar": "k_wyking_garrett.jpg",
+        "websites": [
+            "",
+            ""
+        ],
+        "membership_id": 13
+    }
+]
