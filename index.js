@@ -152,8 +152,8 @@ var app = koa();
 
 app.use(function *(){
     var user = this.request.query.user,
-        auth_key = this.request.auth_key,
-        test = this.request.test;
+        auth_key = this.request.query.auth_key,
+        test = this.request.query.test;
 
     this.set("Content-Type", "application/json");
 
