@@ -24,7 +24,7 @@
         "instagram": "http://instagram.com/some_guy",
         "linkedin": "http://linkedin.com/some_guy",
         "email": "yourboybstar@gmail.com",
-        "avatar": "aramis.jpg",
+        "avatar": "https://raw.githubusercontent.com/BlackDotUnionOrg/members_directory_server/master/test_data_images/aramis.jpg",
         "websites": [
             "JoeNoDesigns.com",
             "http://JoeNoPhoto.com",
@@ -51,7 +51,7 @@
         "instagram": "http://instagram.com/dharris",
         "linkedin": "http://linkedin.com/dharris",
         "email": "ddharris@gmail.com",
-        "avatar": "monica_360.jpg",
+        "avatar": "https://raw.githubusercontent.com/BlackDotUnionOrg/members_directory_server/master/test_data_images/monica_360.jpg",
         "websites": [
             "ddharris.com"
         ],
@@ -80,7 +80,7 @@
         "instagram": "",
         "linkedin": "http://linkedin.com/yvonne_smith",
         "email": "ysmith@gmail.com",
-        "avatar": "k_wyking_garrett.jpg",
+        "avatar": "https://raw.githubusercontent.com/BlackDotUnionOrg/members_directory_server/master/test_data_images/k_wyking.jpg",
         "websites": [
             "",
             ""
