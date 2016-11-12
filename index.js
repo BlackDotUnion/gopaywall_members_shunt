@@ -7,7 +7,29 @@ var cheerio = require('cheerio');
 var config = {
     user: process.env.GOPAYWALL_USER,
     password: process.env.GOPAYWALL_PASS,
-    host: process.env.GOPAYWALL_HOST
+    host: process.env.GOPAYWALL_HOST, // (w/o protocol or .gopaywall.com)
+};
+// TODO: missing avatar in gopaywall
+// maps gopaywall field names to output column names
+var columnNames = {
+  fname: "first_name",
+  lname: "last_name",
+  email: 'email',
+  membership_id: 'membership_id',
+};
+
+// maps gopaywall custom field names to output column names
+var customFieldNames = {
+  "Professional Title": "professional_title",
+  "Short Biography": "description",
+  "Skills": "skills",
+  "Interests": "interests",
+  "Phone Number": "phone_number",
+  "Twitter": "twitter",
+  "Facebook": "facebook",
+  "Instagram": "instagram",
+  "Linked In": "linkedin",
+  "Website": "websites",
 };
 
 var publicFields = [
@@ -16,13 +38,19 @@ var publicFields = [
   'last_name',
   'professional_title',
   'description',
-  'skills', // TODO: array elements need to be processed somewhow
+  'skills',
   'interests',
   'twitter',
   'facebook',
   'instagram',
   'linkedin',
   'avatar',
+  'websites',
+];
+
+var arrayFields = [
+  'skills',
+  'interests',
   'websites',
 ];
 
@@ -98,24 +126,42 @@ function parseData(csvRows, customFields, callback) {
     for (var j = 1; j != csvRows.length; ++j) {
         var row = {};
         for (var name in columnIndices) {
-            var columnIndex = columnIndices[name],
+            var columnName = columnNames[name],
+                columnIndex = columnIndices[name],
                 columnValue = csvRows[j][columnIndex];
 
             if (name == 'custom_fields') {
                 var parts = columnValue.split('::');
 
-                var customFieldsObj = {};
                 customFields.forEach(function (fieldName, fieldIndex) {
-                    customFieldsObj[fieldName] = parts[fieldIndex] || '';
+                    var mappedFieldName = customFieldNames[fieldName];
+                    if (!mappedFieldName) {
+                      return;
+                    }
+
+                    row[mappedFieldName] = parts[fieldIndex] || '';
                 });
-                row[name] = customFieldsObj;
-            } else {
-                row[name] = columnValue;
+            } else if (columnName) {
+                row[columnName] = columnValue;
             }
         }
 
         rows.push(row);
     }
+
+    rows.forEach(function (row) {
+      arrayFields.forEach(function (arrayField) {
+        var csvList = (row[arrayField] || '').replace(/^\s+|\s+$/g, '');
+        if (!csvList.length) {
+          row[arrayField] = [];
+          return;
+        }
+
+        row[arrayField] = csvList.split(',').map(function (element) {
+          return element.replace(/^\s+|\s+$/g, '');
+        });
+      });
+    });
 
     callback(null, rows);
 }
@@ -131,7 +177,7 @@ function isUserAuthenticated(user, authKey, parsedData) {
         return false;
     }
 
-    var minute = (new Date()).getMinute();
+    var minute = (new Date()).getMinutes();
     for (var minuteDiff = -1; minuteDiff != 2; ++minuteDiff) {
         var expectedAuthKey = makeAuthKey(userInfo, minuteDiff + minute);
         if (expectedAuthKey == authKey) {
@@ -145,7 +191,7 @@ function isUserAuthenticated(user, authKey, parsedData) {
 function makeAuthKey(userInfo, minute) {
     var body = [userInfo.email, userInfo.fname + " " + userInfo.lname, userInfo.id, userInfo.membership_id].join(':');
 
-    var hmac = crypto.createHmac('sha1', userInfo.last_login + minute);
+    var hmac = crypto.createHmac('sha1', Buffer.from((userInfo.last_login + minute).toString()));
     hmac.setEncoding('hex');
     hmac.write(body);
     hmac.end();
@@ -195,4 +241,4 @@ app.use(function *(){
 
 app.listen(process.env.PORT);
 
-console.log("listening...");
+console.log(`listening on ${process.env.PORT}...`);
