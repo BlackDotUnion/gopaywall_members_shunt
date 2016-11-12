@@ -162,7 +162,7 @@ app.use(function *(){
         this.set("Access-Control-Allow-Origin", "*");
         result = require('./test_data.json');
     } else {
-        this.set("Access-Control-Allow-Origin", "www.blackdotunion.com");
+        this.set("Access-Control-Allow-Origin", "*");
         result = yield getUsersData(user, auth_key);
     }
 
