@@ -10,6 +10,22 @@ var config = {
     host: process.env.GOPAYWALL_HOST
 };
 
+var publicFields = [
+  'first_name',
+  'middle_name',
+  'last_name',
+  'professional_title',
+  'description',
+  'skills', // TODO: array elements need to be processed somewhow
+  'interests',
+  'twitter',
+  'facebook',
+  'instagram',
+  'linkedin',
+  'avatar',
+  'websites',
+];
+
 function getUsersCsv(callback) {
     var loginData = {
         form: {
@@ -142,7 +158,15 @@ function * getUsersData(user, auth_key) {
     var customFields = yield getCustomFields;
     var parsedData = yield parseData.bind(null, parsedCsv, customFields);
     if (!isUserAuthenticated(user, auth_key, parsedData)) {
-        parsedData = [];
+        parsedData = parsedData.map(function (row) {
+          var newRow = {};
+          Object.keys(row).forEach(function (columnName) {
+            if (publicFields.indexOf(columnName) !== -1) {
+              newRow[columnName] = row[columnName];
+            }
+          });
+          return newRow;
+        });
     }
     return parsedData;
 }
