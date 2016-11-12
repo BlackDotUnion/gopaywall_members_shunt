@@ -30,6 +30,7 @@ var customFieldNames = {
   "Instagram": "instagram",
   "Linked In": "linkedin",
   "Website": "websites",
+  "Photo URL": "avatar",
 };
 
 var publicFields = [
